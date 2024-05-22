@@ -1,0 +1,23 @@
+{
+    "status": "success",
+    "data": {
+        "_id": "64cffee700bad552e8dcd50d",
+        "title": "In Time with You",
+        "description": "A timeless story of dreams, ambition, and the challenges of a big city.",
+        "keywords": [
+            "suspense",
+            "drama"
+        ],
+        "thumbnail": "https://newton-project-resume-backend.s3.ap-south-1.amazonaws.com/posters/tt2473942.jpg",
+        "type": "video song",
+        "createdAt": "2023-08-06T20:13:27.589Z",
+        "__v": 1,
+        "cast": [
+            "Ella Jones",
+            "John Brown",
+            "Sarah Williams"
+        ],
+        "director": "Ava Wilson",
+        "video_url": "https://newton-project-resume-backend.s3.amazonaws.com/video/64cffee700bad552e8dcd50d.mp4"
+    }
+}
