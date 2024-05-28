@@ -21,6 +21,30 @@ const Signup = () => {
     });
   };
 
+  const checkpassword=(str)=>{
+    let specialChar;
+    let upperCase;
+    let lowerCase;
+    let numbers;
+    for(let i=0;i<str.length;i++){
+      if(str[i]>='A' && str[i]<='Z'){
+        upperCase++;
+      }else if(str[i]>='a' && str[i]<='z'){
+        lowerCase++;
+      }else if(str[i]>='0' && str[i]<='9'){
+        numbers++;
+      }else if('!@#$%^&*'.includes(str[i])){
+        specialChar++;
+      }
+    }
+    if(specialChar>0 && upperCase>0 && lowerCase>0 && numbers>0){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,9 +66,15 @@ const Signup = () => {
           theme: "dark"
         })
       } else {
-        toast.success("Account created Successfully!", {
-          theme: "dark"
-        })
+        if(checkpassword(formData.password)){
+          toast.success("Account created Successfully!", {
+            theme: "dark"
+          })
+        }else{
+          toast.error("Please input correct Characters",{
+            theme:'dark'
+          })
+        }
         router("/signin");
       }
     } catch (error) {
