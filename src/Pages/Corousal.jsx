@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Youtubelogo from './YoutubeLogo.png';
 
-const Carousel = () => {
+const Carousel = ({isLogin, setLogIn}) => {
     const router = useNavigate();
     const [shows, setShows] = useState({
     Movies: [],
@@ -16,7 +16,7 @@ const Carousel = () => {
   const [selectedShow, setSelectedShow] = useState(null);
 
   useEffect(() => {
-    fetch('https://academics.newtonschool.co/api/v1/ottx/show?limit=150', {
+    fetch('https://academics.newtonschool.co/api/v1/ottx/show?limit=1000', {
       headers: {
         'accept': 'application/json',
         'projectID': 'dnra3ujpc0u2'
@@ -106,7 +106,12 @@ const Carousel = () => {
     <nav className="bg-black text-white py-3 px-5 flex justify-between items-center">
         <img src={Youtubelogo} className="h-12 cursor-pointer" alt="YouTube Logo" onClick={() => { router("/") }} />
         <div className="right">
-            <button className="py-2 px-4 bg-red-600 text-white cursor-pointer hover:bg-white hover:text-black" onClick={() => { router("/signup") }}>Sign Up</button>
+            <button className="py-2 px-4 bg-red-600 text-white cursor-pointer hover:bg-white hover:text-black" onClick={() => { 
+              if(isLogin){
+                setLogIn();
+              }
+              router("/signup");
+            }}>{isLogin ? "Sign Out" : "Sign in"}</button>
         </div>
     </nav>
     <div className="bg-black text-white p-4 ">
@@ -121,8 +126,10 @@ const Carousel = () => {
           {renderCategory('Trailer', shows.Trailer)}
         </>
       ) : (
-        <p>Loading</p>
+        <h1>Loading...</h1>
       )}
+      {selectedShow && !isLogin && router('/signup')}
+
       {selectedShow && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center modal-overlay" onClick={handleOutsideClick}>
           <div className="bg-black w-[400px] p-8 rounded-lg">
@@ -132,6 +139,7 @@ const Carousel = () => {
               alt={selectedShow.title}
               className="w-[300px] h-[250px] "
             />
+            {/* <button onClick={}></button> */}
             <button onClick={closeModal} className="text-white p-3">
                 <i className="fas fa-play-circle fa-lg"></i>
             </button>

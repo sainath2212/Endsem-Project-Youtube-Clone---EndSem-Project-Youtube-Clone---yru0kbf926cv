@@ -41,13 +41,14 @@ const Signin = ({ setLogIn, setToken, setUserName }) => {
                     theme: "dark"
                 })
             } else {
+
                 toast.success("Logged In Successfully", {
                     theme: "dark"
                 })
                 setLogIn(true);
                 setUserName(data.data.user.name)
                 setToken(data.token);
-                router("/home");
+                router("/");
             }
         } catch (error) {
             console.error('Error:', error);
